@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>SmartFund - Scenario Simulator</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .metric {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .metric-title {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .gap {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+        }
+
+        .description {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 800px) {
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Scenario Simulator</h1>
+
+    <p class="subtitle">
+        Test how different cash-flow situations affect SmartFund.
+    </p>
+
+
+    <div class="card">
+
+        <h2>Select Scenario</h2>
+
+        <form method="GET" action="/scenarios">
+
+            <select name="scenario">
+
+                {% for key, scenario in scenarios.items() %}
+
+                <option value="{{ key }}"
+                    {% if key == selected_scenario %}
+                    selected
+                    {% endif %}>
+
+                    {{ scenario.name }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <button type="submit">
+                Run Scenario
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>{{ result.scenario }}</h2>
+
+        <p class="description">
+            {{ result.description }}
+        </p>
+
+        <div class="grid">
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Current Cash
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.current_cash) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Minimum Required
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.minimum_required) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Upcoming Obligations
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.normal_obligations) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Additional Expense
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.additional_expense) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Total Required
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.total_required) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-title">
+                    Available Cash
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.available_cash) }}
+                </div>
+
+            </div>
+
+
+            <div class="metric gap">
+
+                <div class="metric-title">
+                    Funding Gap
+                </div>
+
+                <div class="metric-value">
+                    ₹{{ "{:,.2f}".format(result.funding_gap) }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

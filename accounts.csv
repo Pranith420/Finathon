@@ -1,0 +1,5 @@
+account_id,account_name,bank,min_balance
+
+bac_ebfaa229,Main Operating Account,HDFC Bank,500000
+
+bac_b3154cb6,Payroll Account,SBI Bank,300000

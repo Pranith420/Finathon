@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFund | Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: #07111f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 900px;
+            min-height: 540px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        /* LEFT SIDE */
+
+        .left {
+            padding: 55px;
+            background: linear-gradient(
+                145deg,
+                #10283b,
+                #07111f
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 45px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                #27e0a3,
+                #18a6ff
+            );
+            color: #07111f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .left h1 {
+            font-size: 40px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .left h1 span {
+            color: #27e0a3;
+        }
+
+        .left p {
+            color: #91a0b2;
+            line-height: 1.7;
+            font-size: 15px;
+            max-width: 350px;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #b9c5d2;
+            font-size: 14px;
+        }
+
+        .check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(39, 224, 163, 0.12);
+            color: #27e0a3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* RIGHT SIDE */
+
+        .right {
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #8493a5;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #c5cfda;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #304052;
+            background: #091523;
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #27e0a3;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 12px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #8998aa;
+        }
+
+        .remember input {
+            width: auto;
+        }
+
+        .forgot {
+            color: #27e0a3;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #27e0a3;
+            color: #07111f;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 18px;
+            color: #8998aa;
+            font-size: 13px;
+        }
+
+        .signup-link a {
+            color: #27e0a3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .notice.success {
+            background: rgba(39, 224, 163, 0.1);
+            border: 1px solid rgba(39, 224, 163, 0.3);
+            color: #27e0a3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back a {
+            color: #8998aa;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back a:hover {
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+
+            .container {
+                width: 92%;
+                grid-template-columns: 1fr;
+            }
+
+            .left {
+                display: none;
+            }
+
+            .right {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                SmartFund
+            </div>
+
+            <h1>
+                Welcome back to
+                <span>SmartFund.</span>
+            </h1>
+
+            <p>
+                Intelligent inter-bank cash allocation and
+                fund movement planning for modern businesses.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Multi-bank cash visibility
+                </div>
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Smart fund allocation
+                </div>
+
+                <div class="feature">
+                    <div class="check">✓</div>
+                    Scenario simulation
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+            <h2>Sign in</h2>
+
+            <p class="subtitle">
+                Enter your credentials to access SmartFund.
+            </p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="notice {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endwith %}
+            {% if error %}
+    <div style="
+        background: rgba(255, 80, 80, 0.1);
+        border: 1px solid rgba(255, 80, 80, 0.3);
+        color: #ff7b7b;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 13px;
+    ">
+        {{ error }}
+    </div>
+{% endif %}
+
+           <form action="/login" method="POST">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="options">
+
+                    <label class="remember">
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+
+                    <a href="#" class="forgot">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn">
+                    Sign In →
+                </button>
+
+            </form>
+
+                <div class="signup-link">
+                    Don't have an account?
+                    <a href="/signup">Create an account</a>
+                </div>
+
+            <div class="back">
+
+                <a href="/">
+                    ← Back to SmartFund
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

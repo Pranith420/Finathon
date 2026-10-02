@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFund | Create Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 24px 0;
+            background: #07111f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: min(900px, 92vw);
+            min-height: 620px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .left {
+            padding: 55px;
+            background: linear-gradient(145deg, #10283b, #07111f);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 45px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #27e0a3, #18a6ff);
+            color: #07111f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .left h1 {
+            font-size: 40px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .left h1 span {
+            color: #27e0a3;
+        }
+
+        .left p {
+            color: #91a0b2;
+            line-height: 1.7;
+            font-size: 15px;
+            max-width: 350px;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #b9c5d2;
+            font-size: 14px;
+        }
+
+        .check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(39, 224, 163, 0.12);
+            color: #27e0a3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right {
+            padding: 48px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #8493a5;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            color: #c5cfda;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #304052;
+            background: #091523;
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #27e0a3;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.3);
+            color: #ff7b7b;
+        }
+
+        .create-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #27e0a3;
+            color: #07111f;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .create-btn:hover {
+            opacity: 0.9;
+        }
+
+        .signin-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #8998aa;
+            font-size: 13px;
+        }
+
+        .signin-link a {
+            color: #27e0a3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back a {
+            color: #8998aa;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back a:hover {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+            body {
+                align-items: flex-start;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left {
+                display: none;
+            }
+
+            .right {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                SmartFund
+            </div>
+
+            <h1>Create your <span>SmartFund account.</span></h1>
+            <p>Start managing business cash, obligations and fund movements smarter.</p>
+
+            <div class="features">
+                <div class="feature"><div class="check">✓</div>Multi-bank cash visibility</div>
+                <div class="feature"><div class="check">✓</div>Smart fund allocation</div>
+                <div class="feature"><div class="check">✓</div>Scenario simulation</div>
+            </div>
+        </div>
+
+        <div class="right">
+            <h2>Create your account</h2>
+            <p class="subtitle">Enter your details to get started with SmartFund.</p>
+
+            {% if error %}
+                <div class="message error" role="alert">{{ error }}</div>
+            {% endif %}
+
+            <form action="/signup" method="POST">
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Enter your full name" value="{{ full_name or '' }}" autocomplete="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ email or '' }}" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" minlength="8" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" autocomplete="new-password" minlength="8" required>
+                </div>
+
+                <button type="submit" class="create-btn">Create Account →</button>
+            </form>
+
+            <div class="signin-link">
+                Already have an account?
+                <a href="/login">Sign in</a>
+            </div>
+
+            <div class="back">
+                <a href="/">← Back to SmartFund</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

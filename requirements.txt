@@ -1,0 +1,4 @@
+Flask
+pandas
+python-dotenv
+supabase>=2.31.0,<3

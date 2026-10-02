@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFund - AI Insights</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #111827;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 15px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .menu a:hover {
+            background: #1f2937;
+        }
+
+        .menu .active a {
+            background: #2563eb;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .header p {
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        /* AI Banner */
+        .ai-banner {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .ai-banner h2 {
+            margin: 0 0 8px 0;
+        }
+
+        .ai-banner p {
+            margin: 0;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Insights */
+        .insight-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 18px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .insight-card h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .insight-card p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 25px;
+            margin-right: 10px;
+        }
+
+        .insight-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        /* Different insight types */
+        .surplus {
+            border-left-color: #16a34a;
+        }
+
+        .warning {
+            border-left-color: #dc2626;
+        }
+
+        .obligation {
+            border-left-color: #f59e0b;
+        }
+
+        .transfer {
+            border-left-color: #2563eb;
+        }
+
+        .success {
+            border-left-color: #16a34a;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+                padding: 20px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            💰 SmartFund
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/accounts">
+                    🏦 Accounts
+                </a>
+            </li>
+
+            <li>
+                <a href="/obligations">
+                    📅 Obligations
+                </a>
+            </li>
+
+            <li>
+                <a href="/transfers">
+                    🔄 Transfer Planner
+                </a>
+            </li>
+
+            <li>
+                <a href="/scenarios">
+                    🧪 Scenarios
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/insights">
+                    🤖 AI Insights
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Main -->
+    <div class="main">
+
+        <div class="header">
+
+            <h1>AI Insights</h1>
+
+            <p>
+                SmartFund analysis and recommendations based on
+                current account positions and planned obligations.
+            </p>
+
+        </div>
+
+
+        <!-- AI Introduction -->
+        <div class="ai-banner">
+
+            <h2>🤖 SmartFund Intelligence</h2>
+
+            <p>
+                The system analyzes account balances, minimum balance
+                requirements, upcoming obligations and planned fund
+                movements to identify potential cash-management actions.
+            </p>
+
+        </div>
+
+
+        <!-- Insights -->
+        {% if insights %}
+
+            {% for insight in insights %}
+
+            <div class="insight-card {{ insight['type'] }}">
+
+                <div class="insight-title">
+
+                    {% if insight['type'] == "surplus" %}
+
+                        <span class="icon">💰</span>
+
+                    {% elif insight['type'] == "warning" %}
+
+                        <span class="icon">⚠️</span>
+
+                    {% elif insight['type'] == "obligation" %}
+
+                        <span class="icon">📅</span>
+
+                    {% elif insight['type'] == "transfer" %}
+
+                        <span class="icon">🔄</span>
+
+                    {% else %}
+
+                        <span class="icon">✅</span>
+
+                    {% endif %}
+
+                    <h3>
+                        {{ insight['title'] }}
+                    </h3>
+
+                </div>
+
+
+                <p>
+                    {{ insight['message'] }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <h3>No insights available</h3>
+
+                <p>
+                    SmartFund does not currently have enough
+                    information to generate insights.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

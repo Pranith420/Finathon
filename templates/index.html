@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFund Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #1f2937;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            width: 240px;
+            height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 25px 15px;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-left: 15px;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu li {
+            padding: 14px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .menu li:hover,
+        .menu .active {
+            background: #1e40af;
+        }
+
+
+        /* MAIN CONTENT */
+
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+        }
+
+        .api-status {
+            background: #dcfce7;
+            color: #166534;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+
+        /* SUMMARY CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .green {
+            color: #16a34a;
+        }
+
+        .red {
+            color: #dc2626;
+        }
+
+        .blue {
+            color: #2563eb;
+        }
+
+
+        /* MAIN CONTENT GRID */
+
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow:
+                0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+
+        /* TABLE */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+
+        /* STATUS */
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .surplus {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .deficit {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+
+        /* SUMMARY BOX */
+
+        .transfer-box {
+            background: #eff6ff;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .transfer-amount {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 8px;
+            color: #1d4ed8;
+        }
+
+
+        /* CASH REQUIREMENT SUMMARY */
+
+        .cash-summary {
+            margin-bottom: 30px;
+        }
+
+        .cash-summary h2 {
+            margin-bottom: 20px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .summary-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .summary-box-title {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .summary-box-value {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+
+        /* OBLIGATIONS */
+
+        .obligations-section {
+            margin-bottom: 30px;
+        }
+
+        .obligations-section h2 {
+            margin-bottom: 10px;
+        }
+
+        .obligations-description {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .obligations-table {
+            overflow-x: auto;
+        }
+
+
+        /* FUND MOVEMENTS */
+
+        .fund-movements {
+            margin-bottom: 30px;
+        }
+
+        .movement-box {
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .movement-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .movement-row {
+            margin-bottom: 7px;
+        }
+
+        .movement-amount {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1d4ed8;
+            margin-top: 10px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media(max-width: 1200px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media(max-width: 1000px) {
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+                padding: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            Smart<span>Fund</span>
+        </div>
+<ul class="menu">
+
+    <li class="active">
+        <a href="/" style="color:white; text-decoration:none;">
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="/accounts" style="color:white; text-decoration:none;">
+             Accounts
+        </a>
+    </li>
+
+    <li>
+        <a href="/obligations" style="color:white; text-decoration:none;">
+             Obligations
+        </a>
+    </li>
+
+    <li>
+        <a href="/transfers" style="color:white; text-decoration:none;">
+             Transfer Planner
+        </a>
+    </li>
+
+    <li>
+        <a href="/scenarios" style="color:white; text-decoration:none;">
+             Scenarios
+        </a>
+    </li>
+
+    <li>
+        <a href="/insights" style="color:white; text-decoration:none;">
+             AI Insights
+        </a>
+    </li>
+    <li>
+    <a href="/logout" style="color:white; text-decoration:none;">
+         Logout
+    </a>
+</li>
+
+</ul>
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    Cash Control Dashboard
+                </h1>
+
+                <p>
+                    Inter-bank cash allocation & fund movement
+                </p>
+
+            </div>
+
+            <div class="api-status">
+                ● Local Data Loaded
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="cards">
+
+
+            <!-- TOTAL CASH -->
+
+            <div class="card">
+
+                <div class="card-title">
+                    Total Cash
+                </div>
+
+                <div class="card-value blue">
+                    ₹{{ "{:,.2f}".format(total_balance) }}
+                </div>
+
+            </div>
+
+
+            <!-- MONEY IN -->
+
+            <div class="card">
+
+                <div class="card-title">
+                    Money In
+                </div>
+
+                <div class="card-value green">
+                    ₹{{ "{:,.2f}".format(total_money_in) }}
+                </div>
+
+            </div>
+
+
+            <!-- MONEY OUT -->
+
+            <div class="card">
+
+                <div class="card-title">
+                    Money Out
+                </div>
+
+                <div class="card-value red">
+                    ₹{{ "{:,.2f}".format(total_money_out) }}
+                </div>
+
+            </div>
+
+
+            <!-- NET CASH FLOW -->
+
+            <div class="card">
+
+                <div class="card-title">
+                    Net Cash Flow
+                </div>
+
+                <div class="card-value
+                {% if net_cash_flow >= 0 %}
+                    green
+                {% else %}
+                    red
+                {% endif %}">
+
+                    ₹{{ "{:,.2f}".format(net_cash_flow) }}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ACCOUNT POSITION + SMARTFUND SUMMARY -->
+
+        <div class="content">
+
+
+            <!-- ACCOUNTS -->
+
+            <div class="section">
+
+                <h2>
+                    Account Position
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Account
+                            </th>
+
+                            <th>
+                                Transactions
+                            </th>
+
+                            <th>
+                                Money In
+                            </th>
+
+                            <th>
+                                Money Out
+                            </th>
+
+                            <th>
+                                Balance
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for account_id, data in accounts.items() %}
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    {{ account_id }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                {{ data.transactions }}
+                            </td>
+
+                            <td class="green">
+                                ₹{{ "{:,.0f}".format(data.total_credit) }}
+                            </td>
+
+                            <td class="red">
+                                ₹{{ "{:,.0f}".format(data.total_debit) }}
+                            </td>
+
+                            <td>
+
+                                ₹{{ "{:,.0f}".format(data.balance) }}
+
+                                {% if data.balance >= 0 %}
+
+                                <span class="status surplus">
+                                    Positive
+                                </span>
+
+                                {% else %}
+
+                                <span class="status deficit">
+                                    Deficit
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- SMARTFUND SUMMARY -->
+
+            <div class="section">
+
+                <h2>
+                    SmartFund Summary
+                </h2>
+
+
+                <div class="transfer-box">
+
+                    <strong>
+                        Transactions analyzed
+                    </strong>
+
+                    <div class="transfer-amount">
+                        {{ transactions_count }}
+                    </div>
+
+                </div>
+
+
+                <div class="transfer-box">
+
+                    <strong>
+                        Accounts detected
+                    </strong>
+
+                    <div class="transfer-amount">
+                        {{ accounts|length }}
+                    </div>
+
+                </div>
+
+
+                <div class="transfer-box">
+
+                    <strong>
+                        Cash flow status
+                    </strong>
+
+                    <div class="transfer-amount">
+
+                        {% if net_cash_flow >= 0 %}
+
+                            Positive
+
+                        {% else %}
+
+                            Negative
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- CASH REQUIREMENT SUMMARY -->
+
+        <div class="card cash-summary">
+
+            <h2>
+                Cash Requirement Summary
+            </h2>
+
+
+            <div class="summary-grid">
+
+
+                <!-- UPCOMING OBLIGATIONS -->
+
+                <div class="summary-box">
+
+                    <div class="summary-box-title">
+                        Upcoming Obligations
+                    </div>
+
+                    <div class="summary-box-value">
+                        ₹{{ "{:,.2f}".format(total_obligations) }}
+                    </div>
+
+                </div>
+
+
+                <!-- MINIMUM BALANCE -->
+
+                <div class="summary-box">
+
+                    <div class="summary-box-title">
+                        Minimum Balance Required
+                    </div>
+
+                    <div class="summary-box-value">
+                        ₹{{ "{:,.2f}".format(total_minimum_balance) }}
+                    </div>
+
+                </div>
+
+
+                <!-- AVAILABLE CASH -->
+
+                <div class="summary-box">
+
+                    <div class="summary-box-title">
+                        Available Cash
+                    </div>
+
+                    <div class="summary-box-value">
+                        ₹{{ "{:,.2f}".format(available_cash) }}
+                    </div>
+
+                </div>
+
+
+                <!-- FUNDING GAP -->
+
+                <div class="summary-box">
+
+                    <div class="summary-box-title">
+                        Funding Gap
+                    </div>
+
+                    <div class="summary-box-value">
+                        ₹{{ "{:,.2f}".format(funding_gap) }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- UPCOMING OBLIGATIONS -->
+
+        <div class="card obligations-section">
+
+            <h2>
+                Upcoming Obligations
+            </h2>
+
+            <p class="obligations-description">
+                Future payments that SmartFund is reserving cash for.
+            </p>
+
+
+            <div class="obligations-table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Account
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Due Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for obligation in obligations %}
+
+                        <tr>
+
+                            <td>
+                                {{ obligation.type }}
+                            </td>
+
+                            <td>
+                                {{ obligation.description }}
+                            </td>
+
+                            <td>
+                                {{ obligation.account_id }}
+                            </td>
+
+                            <td>
+                                ₹{{ "{:,.2f}".format(obligation.amount) }}
+                            </td>
+
+                            <td>
+                                {{ obligation.due_date }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECOMMENDED FUND MOVEMENTS -->
+
+        <div class="card fund-movements">
+
+            <h2>
+                Recommended Fund Movements
+            </h2>
+
+
+            {% if transfer_plan %}
+
+                {% for transfer in transfer_plan %}
+
+                <div class="movement-box">
+
+                    <div class="movement-title">
+                        Transfer {{ loop.index }}
+                    </div>
+
+                    <div class="movement-row">
+                        <strong>Source:</strong>
+                        {{ transfer.source }}
+                    </div>
+
+                    <div class="movement-row">
+                        <strong>Destination:</strong>
+                        {{ transfer.destination }}
+                    </div>
+
+                    <div class="movement-amount">
+                        ₹{{ "{:,.2f}".format(transfer.amount) }}
+                    </div>
+
+                    <div class="movement-row">
+                        <strong>Reason:</strong>
+                        {{ transfer.reason }}
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>
+                    No fund movements are currently required.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+<!-- ==================================================
+     SMARTFUND CHATBOT
+================================================== -->
+
+<button id="chatButton" onclick="toggleChat()">
+    💬
+</button>
+
+<div id="chatWindow">
+
+    <div class="chatHeader">
+        🤖 SmartFund Assistant
+        <button onclick="toggleChat()">×</button>
+    </div>
+
+    <div id="chatMessages">
+
+        <div class="botMessage">
+            Hello! 👋 I'm your SmartFund Assistant.
+            <br><br>
+            You can ask me about accounts, obligations,
+            funding gaps, and recommended transfers.
+        </div>
+
+    </div>
+
+    <div class="chatInput">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Ask SmartFund..."
+            onkeydown="if(event.key === 'Enter') sendMessage()"
+        >
+
+        <button onclick="sendMessage()">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    #chatButton {
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        width: 60px;
+        height: 60px;
+        border: none;
+        border-radius: 50%;
+        background: #2563eb;
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+        z-index: 9999;
+    }
+
+    #chatWindow {
+        display: none;
+        position: fixed;
+        right: 25px;
+        bottom: 95px;
+        width: 360px;
+        height: 500px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        overflow: hidden;
+        z-index: 9999;
+    }
+
+    .chatHeader {
+        height: 60px;
+        background: #111827;
+        color: white;
+        padding: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatHeader button {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    #chatMessages {
+        height: 380px;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f4f6f9;
+    }
+
+    .botMessage,
+    .userMessage {
+        max-width: 85%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+    .botMessage {
+        background: white;
+        margin-right: auto;
+    }
+
+    .userMessage {
+        background: #2563eb;
+        color: white;
+        margin-left: auto;
+    }
+
+    .chatInput {
+        height: 60px;
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+
+    .chatInput input {
+        flex: 1;
+        border: none;
+        padding: 15px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .chatInput button {
+        width: 60px;
+        border: none;
+        background: #2563eb;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+</style>
+
+
+<script>
+
+    function toggleChat() {
+
+        const chatWindow =
+            document.getElementById("chatWindow");
+
+        if (chatWindow.style.display === "none" ||
+            chatWindow.style.display === "") {
+
+            chatWindow.style.display = "block";
+
+        } else {
+
+            chatWindow.style.display = "none";
+
+        }
+
+    }
+
+
+    async function sendMessage() {
+
+        const input =
+            document.getElementById("chatInput");
+
+        const messages =
+            document.getElementById("chatMessages");
+
+        const question =
+            input.value.trim();
+
+        if (!question) {
+            return;
+        }
+
+
+        // Show user message
+        const userMessage =
+            document.createElement("div");
+
+        userMessage.className = "userMessage";
+
+        userMessage.textContent = question;
+
+        messages.appendChild(userMessage);
+
+
+        // Clear input
+        input.value = "";
+
+
+        // Show thinking message
+        const thinking =
+            document.createElement("div");
+
+        thinking.className = "botMessage";
+
+        thinking.textContent = "Thinking...";
+
+        messages.appendChild(thinking);
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        try {
+
+            const response =
+                await fetch("/api/chat", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        question: question
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            thinking.textContent =
+                data.answer ||
+                "Sorry, I couldn't generate an answer.";
+
+
+        } catch (error) {
+
+            thinking.textContent =
+                "Unable to connect to SmartFund Assistant.";
+
+        }
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+</script>
+
+
+
+</body>
+
+</html>

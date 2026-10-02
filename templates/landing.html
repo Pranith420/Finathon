@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFund | Intelligent Cash Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #27e0a3, #18a6ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #07111f;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aab7c7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            background: #27e0a3;
+            color: #07111f;
+            padding: 11px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 7% 70px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(39,224,163,0.3);
+            background: rgba(39,224,163,0.08);
+            color: #27e0a3;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #27e0a3;
+        }
+
+        .hero p {
+            color: #aab7c7;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn {
+            background: #27e0a3;
+            color: #07111f;
+            padding: 15px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .secondary-btn {
+            border: 1px solid #304052;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+        }
+
+        /* DASHBOARD PREVIEW */
+
+        .dashboard-preview {
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .preview-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .preview-title {
+            font-weight: bold;
+        }
+
+        .status {
+            color: #27e0a3;
+            font-size: 12px;
+        }
+
+        .balance {
+            background: #132337;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .balance small {
+            color: #8292a6;
+        }
+
+        .balance h2 {
+            margin-top: 8px;
+            font-size: 30px;
+        }
+
+        .mini-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .mini-card {
+            background: #132337;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .mini-card small {
+            color: #8292a6;
+        }
+
+        .mini-card strong {
+            display: block;
+            margin-top: 7px;
+            font-size: 18px;
+        }
+
+        /* FEATURES */
+
+        .features {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 7% 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #8998aa;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: rgba(39,224,163,0.1);
+            color: #27e0a3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #8998aa;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 55px;
+            text-align: center;
+            border-radius: 18px;
+            background: linear-gradient(
+                135deg,
+                #10263a,
+                #0d1a2b
+            );
+            border: 1px solid #26384d;
+        }
+
+        .cta h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #8998aa;
+            margin-bottom: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #647386;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                margin-left: 7%;
+                margin-right: 7%;
+                padding: 35px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            SmartFund
+        </div>
+
+        <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="/login">Login</a>
+</div>
+
+<a href="/login" class="nav-button">
+    Login
+</a>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div>
+
+            <div class="badge">
+                SMART TREASURY MANAGEMENT
+            </div>
+
+            <h1>
+                Move Cash <span>Smarter.</span><br>
+                Fund What Matters.
+            </h1>
+
+            <p>
+                SmartFund analyzes business bank accounts,
+                upcoming obligations and available cash to
+                identify funding gaps and recommend efficient
+                inter-bank fund movements.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/" class="primary-btn">
+                    Launch SmartFund →
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD PREVIEW -->
+
+        <div class="dashboard-preview">
+
+            <div class="preview-top">
+
+                <div class="preview-title">
+                    Cash Overview
+                </div>
+
+                <div class="status">
+                    ● LIVE DATA
+                </div>
+
+            </div>
+
+            <div class="balance">
+
+                <small>Total Available Cash</small>
+
+                <h2>₹12.84 L</h2>
+
+            </div>
+
+            <div class="mini-cards">
+
+                <div class="mini-card">
+                    <small>Upcoming Obligations</small>
+                    <strong>₹8.00 L</strong>
+                </div>
+
+                <div class="mini-card">
+                    <small>Funding Gap</small>
+                    <strong>₹2.15 L</strong>
+                </div>
+
+                <div class="mini-card">
+                    <small>Recommended Transfers</small>
+                    <strong>03</strong>
+                </div>
+
+                <div class="mini-card">
+                    <small>Accounts Connected</small>
+                    <strong>04</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+
+            <h2>Everything You Need to Manage Cash</h2>
+
+            <p>
+                A single platform for visibility, planning and
+                intelligent fund allocation.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="feature-icon">₹</div>
+
+                <h3>Multi-Bank Visibility</h3>
+
+                <p>
+                    Monitor balances and transaction activity
+                    across multiple business bank accounts.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">↗</div>
+
+                <h3>Smart Fund Allocation</h3>
+
+                <p>
+                    Identify surplus and deficit accounts and
+                    calculate suitable fund movements.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">✓</div>
+
+                <h3>Obligation Tracking</h3>
+
+                <p>
+                    Track upcoming payroll, vendor and tax
+                    obligations before they become funding gaps.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3>Scenario Simulation</h3>
+
+                <p>
+                    Simulate delayed collections, unexpected
+                    expenses and changing payment requirements.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">⇄</div>
+
+                <h3>Transfer Planning</h3>
+
+                <p>
+                    Generate recommended source and destination
+                    accounts with calculated transfer amounts.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">AI</div>
+
+                <h3>Smart Assistant</h3>
+
+                <p>
+                    Ask questions about balances, obligations,
+                    surplus cash and recommended fund movements.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta" id="how">
+
+        <h2>
+            Ready to Optimize Your Cash?
+        </h2>
+
+        <p>
+            Turn scattered bank balances into actionable
+            treasury decisions.
+        </p>
+
+        <a href="/" class="primary-btn">
+            Open SmartFund Dashboard →
+        </a>
+
+    </section>
+
+
+    <footer>
+
+        SmartFund • Intelligent Inter-Bank Cash Allocation
+
+    </footer>
+
+</body>
+</html>

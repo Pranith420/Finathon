@@ -1,0 +1,4 @@
+obligation_id,account_id,type,description,amount,due_date
+OB001,bac_b3154cb6,Payroll,Employee Salary,500000,2026-10-05
+OB002,bac_ebfaa229,Vendor,Vendor Payment,200000,2026-10-07
+OB003,bac_b3154cb6,Tax,GST Payment,100000,2026-10-10
